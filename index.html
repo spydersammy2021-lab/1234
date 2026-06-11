@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOKS STORE PREMIUM | Oficjalny Portal</title>
+    <style>
+        /* ==========================================
+           1. RESET I CONFIG GŁÓWNY
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(56, 189, 248, 0.6);
+        }
+
+        body {
+            background: linear-gradient(135deg, #070a13 0%, #0f172a 40%, #1e1b4b 70%, #2e104d 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ==========================================
+           2. ANIMOWANE NEONOWE TŁO PARTICLES
+           ========================================== */
+        .bg-animations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .circle-drop {
+            position: absolute;
+            background: linear-gradient(to right, rgba(56, 189, 248, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 50%;
+            animation: floatAround 15s infinite ease-in-out;
+        }
+
+        .circle-1 { width: 400px; height: 400px; top: -10%; left: -10%; animation-delay: 0s; }
+        .circle-2 { width: 500px; height: 500px; bottom: -20%; right: -10%; animation-delay: 3s; }
+        .circle-3 { width: 300px; height: 300px; top: 50%; left: 70%; animation-delay: 6s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            50% { transform: translateY(-40px) scale(1.1) rotate(180deg); }
+        }
+
+        /* ==========================================
+           3. GÓRNY PASEK MENU - GLASS EFFECT
+           ========================================== */
+        header {
+            width: 100%;
+            background: rgba(7, 10, 19, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #38bdf8, #a855f7);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #070a13;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #38bdf8, #f43f5e, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #38bdf8;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after { width: 100%; }
+        nav a:hover {
+            color: #38bdf8;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        /* ==========================================
+           4. SEKCJA HERO
+           ========================================== */
+        .wrapper {
+            max-width: 1300px;
+            width: 92%;
+            margin: 140px auto 60px auto;
+        }
+
+        .hero-banner {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 40px;
+            padding: 80px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #f43f5e, #a855f7);
+        }
+
+        .hero-banner h1 {
+            font-size: 4.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-banner h1 span {
+            background: linear-gradient(to right, #38bdf8, #3b82f6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-banner p {
+            font-size: 1.35rem;
+            color: #94a3b8;
+            max-width: 750px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+        }
+
+        .badge-premium {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid #a855f7;
+            color: #d8b4fe;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .grid-info-banners {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .info-mini-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-mini-card .info-icon { font-size: 2.5rem; }
+        .info-mini-card h4 { font-size: 1.15rem; margin-bottom: 5px; color: #f1f5f9; }
+        .info-mini-card p { color: #94a3b8; font-size: 0.95rem; }
+
+        .section-heading {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin: 60px 0 35px 0;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-heading span { color: #38bdf8; }
+
+        /* ==========================================
+           5. INTERAKTYWNY KATALOG PRODUKTÓW
+           ========================================== */
+        .products-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .premium-product-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .premium-product-box:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: #38bdf8;
+            box-shadow: 0 40px 80px rgba(56, 189, 248, 0.15);
+        }
+
+        .product-preview-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .premium-product-box:hover .product-preview-img {
+            transform: scale(1.05);
+        }
+
+        .premium-product-box h3 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .click-hint {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #a855f7;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-desc {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            height: 70px;
+        }
+
+        .price-badge-zone {
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            padding: 12px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .price-val {
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .action-button-store {
+            display: inline-block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+            border: none;
+            color: #ffffff;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* ==========================================
+           6. SEKCJA MANUFAKTURY
+           ========================================== */
+        .manufaktura-section {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 32px;
+            padding: 50px;
+            margin-bottom: 60px;
+        }
+
+        .manufaktura-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .manufaktura-step {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid #a855f7;
+            padding: 25px;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .manufaktura-step h5 { font-size: 1.2rem; color: #d8b4fe; margin-bottom: 8px; }
+
+        /* ==========================================
+           7. NOWOCZESNE POPUPY (MODALE) Z SEKCJĄ 123
+           ========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 10, 19, 0.93);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 950px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 32px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .close-modal-btn:hover { color: #f43f5e; }
+
+        .modal-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .gallery-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.03);
+            border-color: #38bdf8;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: contain;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .gallery-card p {
+            font-size: 0.95rem;
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* ==========================================
+           8. TABELA HARMONOGRAMU
+           ========================================== */
+        .timetable-container {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            margin-bottom: 60px;
+        }
+
+        .glass-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .glass-table th, .glass-table td {
+            padding: 20px 25px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.1rem;
+        }
+
+        .glass-table th {
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-flexible { background: rgba(234, 179, 8, 0.15); border: 1px solid #eab308; color: #fde047; padding: 4px 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; }
+
+        /* ==========================================
+           9. FAQ & REGULAMIN
+           ========================================== */
+        .faq-accordion { display: flex; flex-direction: column; gap: 15px; margin-bottom: 60px; }
+        .faq-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 25px; }
+        .faq-question { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; }
+        .faq-answer { margin-top: 12px; color: #94a3b8; line-height: 1.6; }
+
+        .legal-footer-box {
+            background: rgba(244, 63, 94, 0.02);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            border-radius: 32px;
+            padding: 45px;
+        }
+
+        .legal-footer-box h3 { color: #f43f5e; font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; text-transform: uppercase; }
+        .legal-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .legal-list li { font-size: 1.15rem; color: #cbd5e1; line-height: 1.8; padding-left: 30px; position: relative; }
+        .legal-list li::before { content: '⚠️'; position: absolute; left: 0; top: 0; }
+        .legal-list li b { color: #f43f5e; }
+        .bottom-credits { text-align: center; margin-top: 60px; color: #475569; font-size: 0.95rem; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-animations">
+        <div class="circle-drop circle-1"></div>
+        <div class="circle-drop circle-2"></div>
+        <div class="circle-drop circle-3"></div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">BLOKS STORE</div>
+        </div>
+        <nav>
+            <a href="#produkty">Katalog</a>
+            <a href="#manufaktura">Manufaktura</a>
+            <a href="#godziny">Godziny Pracy</a>
+            <a href="#faq">FAQ</a>
+            <a href="#regulamin">Regulamin</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        
+        <div class="hero-banner">
+            <div class="badge-premium">💎 OFICJALNA CHMURA GITHUB — FOLDER 123 💎</div>
+            <h1>Witamy w Nowej Erze <span>BLOKS Electronics</span></h1>
+            <p>Wszystkie grafiki i schematy zostały posegregowane i pobierają się z Twojego repozytorium internetowego. Kliknij produkt, aby odpalić wyskakujące okno galerii! 🚀🔥</p>
+            <div style="background: linear-gradient(90deg, rgba(56, 189, 248, 0.15), rgba(168, 85, 247, 0.15)); border: 1px solid rgba(56, 189, 248, 0.3); padding: 15px 30px; display: inline-block; border-radius: 12px; font-weight: 700; color: #e2e8f0;">
+                📅 OFICJALNY START DROPU MARKI: 1 Lipca 2026 Roku!
+            </div>
+        </div>
+
+        <div class="grid-info-banners">
+            <div class="info-mini-card">
+                <div class="info-icon">🪵</div>
+                <div>
+                    <h4>Manufaktura Premium</h4>
+                    <p>Ręcznie robione makiety z drewna i kartonu.</p>
+                </div>
+            </div>
+            <div class="info-mini-card">
+                <div class="info-icon">🎨</div>
+                <div>
+                    <h4>Projekty z Paint-a</h4>
+                    <p>Oficjalne rysunki cyfrowe wgrane do folderu 123.</p>
+                </div>
+            </div>
+            <div class="info-mini-card">
+                <div class="info-icon">🎒</div>
+                <div>
+                    <h4>Gdzie kupić?</h4>
+                    <p>Pod Szkołą Podstawową nr 5 po lekcjach!</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="produkty" class="section-heading">🛒 <span>Katalog Produktów</span> — Kliknij, aby otworzyć galerię!</h2>
+        <div class="products-showcase">
+            
+            <div class="premium-product-box" onclick="openModal('speaker-modal')">
+                <img src="123/projekt_glosnika.png" class="product-preview-img" alt="Projekt Głośnika">
+                <div class="click-hint">👁️ KLIKNIJ: ZOBACZ PROJEKT Z PAINT-A</div>
+                <h3>BLOKS V1 Speaker</h3>
+                <p class="product-desc">Kompaktowy zielony głośniczek makieta. Posiada precyzyjnie rozrysowane kropki głośnika oraz boczne przyciski sterujące.</p>
+                <div class="price-badge-zone">
+                    <div style="font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 2px;">Cena za sztukę</div>
+                    <div class="price-val">5 ZŁ</div>
+                </div>
+                <button class="action-button-store">Otwórz szczegóły i opis 🔊</button>
+            </div>
+
+            <div class="premium-product-box" onclick="openModal('phone-modal')">
+                <img src="123/projekt_telefonu.png" class="product-preview-img" alt="Projekt Telefonu">
+                <div class="click-hint">👁️ KLIKNIJ: PEŁNA GALERIA FOTO & BLUEPRINT</div>
+                <h3>Blocks V1 Phone</h3>
+                <p class="product-desc">Mój oficjalny projekt smartfona z Painta wraz z całą klasyczną galerią drewnianych modeli od Wiktora na dywanie!</p>
+                <div class="price-badge-zone">
+                    <div style="font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 2px;">Cena za sztukę</div>
+                    <div class="price-val">10 ZŁ</div>
+                </div>
+                <button class="action-button-store">Otwórz galerię zdjęć 📱</button>
+            </div>
+
+        </div>
+
+        <div id="speaker-modal" class="modal-overlay" onclick="closeModal('speaker-modal')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="close-modal-btn" onclick="closeModal('speaker-modal')">×</button>
+                <h2 style="color:#38bdf8; margin-bottom:15px; font-size:2rem;">🔊 Projekt głośniczka z Paint-a</h2>
+                <p style="color:#cbd5e1; margin-bottom:20px;">Oficjalny projekt zielonego głośniczka z logiem V2, bocznymi panelami i kropkami naniesionymi cyfrowo.</p>
+                
+                <div class="modal-gallery-grid">
+                    <div class="gallery-card">
+                        <img src="123/projekt_glosnika.png" alt="Głośnik Projekt">
+                        <p>Projekt Cyfrowy Głośnika</p>
+                    </div>
+                </div>
+                
+                <p style="color:#e2e8f0; font-weight:700; background:rgba(56, 189, 248, 0.1); padding:15px; border-radius:12px;">🎒 Gdzie kupić: Łap nas stacjonarnie w Jastrzębie-Zdrój pod Szkołą Podstawową nr 5 zaraz po skończonych lekcjach!</p>
+            </div>
+        </div>
+
+        <div id="phone-modal" class="modal-overlay" onclick="closeModal('phone-modal')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="close-modal-btn" onclick="closeModal('phone-modal')">×</button>
+                <h2 style="color:#38bdf8; margin-bottom:10px; font-size:2rem;">📱 Galeria Blocks Phone (Projekty & Klasyki)</h2>
+                <p style="color:#cbd5e1; margin-bottom:15px;">Poniżej skrypt idealnie posegregował pliki z folderu 123. Zobacz mój nowy projekt oraz legendarny, stary model od Wiktora!</p>
+                
+                <div class="modal-gallery-grid">
+                    <div class="gallery-card">
+                        <img src="123/projekt_telefonu.png" alt="Blocks V1 Phone">
+                        <p>Blocks V1 Phone (Z Paint-a)</p>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="123/zawieszka.png" alt="Zawieszka">
+                        <p style="color:#f43f5e; font-weight:700;">Zawieszka (NIE NA SPRZEDAŻ! ❌)</p>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="123/stary_1.png" alt="Stary model tył">
+                        <p>Stary model — Tył (Aparaty)</p>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="123/stary_2.png" alt="Stary model przód">
+                        <p>Stary model — Przód (17:00)</p>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="123/stary_3.png" alt="Stary model bok">
+                        <p>Stary model — Widok z boku (100%)</p>
+                    </div>
+                    <div class="gallery-card">
+                        <img src="123/stary_4.png" alt="Stary model dywan">
+                        <p>Stary model — Na dywanie</p>
+                    </div>
+                </div>
+
+                <div style="background:rgba(56, 189, 248, 0.08); border-left:4px solid #38bdf8; padding:18px; border-radius:12px; color:#e2e8f0; line-height:1.6; margin-top:20px;">
+                    ℹ️ <b>Opis modeli:</b> Sklep prezentuje pełną historię marki. Nowa wersja V1 z Painta ma potrójny aparat w rogu i stylowe panele boczne. Klasyczna, drewniana makieta od Wiktora posiada historyczną tarczę zegara (Piątek 13 Marca, 17:00), głębokie kasztanowe kolory i legendarne logo z tyłu obudowy! Zwrotów nie przyjmujemy!
+                </div>
+            </div>
+        </div>
+
+        <h2 id="manufaktura" class="section-heading">🛠️ Nasza <span>Manufaktura</span> (Jak Tworzymy?)</h2>
+        <div class="manufaktura-section">
+            <p style="color: #cbd5e1; font-size: 1.15rem; line-height: 1.7; margin-bottom: 30px;">
+                Jesteśmy dumną, lokalną **Manufakturą**. Każdy produkt przechodzi przez długi proces ręcznego planowania, wycinania i dopasowywania elementów z drewna na działce oraz grubych kartonów.
+            </p>
+            <div class="manufaktura-grid">
+                <div class="manufaktura-step">
+                    <h5>Krok 1: Projekt w Paincie</h5>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Dokładne rozrysowanie wymiarów, położenia aparatów w rogu obudowy i akcesoriów bocznych.</p>
+                </div>
+                <div class="manufaktura-step">
+                    <h5>Krok 2: Pozyskanie Drewna</h5>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Wyprawy po najlepsze materiały, drewniane bazy konstrukcyjne i mocne tektury.</p>
+                </div>
+                <div class="manufaktura-step">
+                    <h5>Krok 3: Ręczny Montaż</h5>
+                    <p style="color: #94a3b8; font-size: 0.95rem;">Precyzyjne wycinanie, nanoszenie kropek głośnika markerem i nakładanie unikalnych kolorów.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 id="godziny" class="section-heading">⏱️ <span>Godziny Otwarcia</span> Mini Sklepiku BLOKS</h2>
+        <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 20px;">Lokalizacja sprzedaży: <b>Jastrzębie-Zdrój | Przy wyjściu ze Szkoły Podstawowej nr 5 (Zawsze po dzwonku kończącym lekcje!)</b></p>
+        
+        <div class="timetable-container">
+            <table class="glass-table">
+                <thead>
+                    <tr>
+                        <th>Dzień Tygodnia</th>
+                        <th>Godziny Obecności Pod Szkołą</th>
+                        <th>Status Operacyjny</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Poniedziałek</b></td>
+                        <td>11:00 — 12:00</td>
+                        <td><span style="color:#38bdf8; font-weight:700;">Aktywne Po Lekcjach</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Wtorek</b></td>
+                        <td>14:00 lub 15:00</td>
+                        <td><span class="badge-flexible">Zależne od Dzwonka</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Środa</b></td>
+                        <td>13:00 — 14:00</td>
+                        <td><span style="color:#4ade80;">Dostępne</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Czwartek</b></td>
+                        <td>14:00 — 15:00 — 16:00</td>
+                        <td><span style="color:#4ade80;">Dostępne (Długi Dyżur)</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Piątek</b></td>
+                        <td><b style="color:#4ade80;">OTWARTE (Wyjątek: Wycieczka 12 Czerwca)</b></td>
+                        <td><span class="badge-flexible" style="background:rgba(34,197,94,0.15); border-color:#22c55e; color:#4ade80;">Wyjątkowy Tryb Wycieczkowy</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Sobota / Niedziela</b></td>
+                        <td>Nieustalone ❓</td>
+                        <td><span class="badge-flexible">Odpoczynek / Serwery Weekendowe</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 id="faq" class="section-heading">❓ Najczęściej <span>Zadawane Pytania</span> (FAQ)</h2>
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <div class="faq-question">Czy telefony Blocks Phone dzwonią i obsługują internet?</div>
+                <div class="faq-answer">Nie! Urządzenia z serii BLOKS są profesjonalnie wykonanymi makietami i prototypami z prawdziwego drewna oraz kartonu. Służą wyłącznie do kreatywnej zabawy, odgrywania ról i cieszenia oka unikalnym designem!</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Jak dzielicie się zarobionymi pieniędzmi w zespole?</div>
+                <div class="faq-answer">Z każdego sprzedanego głośnika (5 zł) twórca projektu dostaje 3 zł za materiały i wykonanie, a sprzedawca 2 zł. Z każdego sprzedanego telefonu (10 zł) dzielimy się idealnie po połowie – każdy zgarnia równe 5 zł!</div>
+            </div>
+        </div>
+
+        <div id="regulamin" class="legal-footer-box">
+            <h3>⚠️ Oficjalny Regulamin & Ważny Komunikat Prawny</h3>
+            <ul class="legal-list">
+                <li><b>SPECYFIKACJA MATERIAŁOWA:</b> Wszystkie oferowane produkty są w 100% wykonane ręcznie z materiałów takich jak drewno, papier oraz twardy karton w naszej oficjalnej <b>Manufakturze</b>.</li>
+                <li><b>POLITYKA ZWROTÓW (BARDZO WAŻNE):</b> Po sfinalizowaniu transakcji pod szkołą i przekazaniu gotówki <b>ZWROTÓW NIE PRZYJMUJEMY!</b> Każdy klient ma prawo przed zakupem dokładnie obejrzeć drewniany prototyp w dłoniach.</li>
+                <li><b>KOMUNIKAT SPECJALNY (PIĄTEK 12 CZERWCA):</b> W związku z zaplanowaną wycieczką szkolną i zapowiedzianym bardzo długim spacerem całej klasy, nasz mini sklepik działa w trybie wyjątkowym wyjazdowym!</li>
+            </ul>
+        </div>
+
+        <div class="bottom-credits">
+            © 2026 BLOKS Electronics Inc. | Wszelkie Prawa do Projektu Zastrzeżone.
+        </div>
+
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
