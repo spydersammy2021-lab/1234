@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLOKS ELECTRONICS HUB — GLOBAL ULTRA MASTER V4.0</title>
+    <title>BLOKS ELECTRONICS — GLOBAL ULTRA PRO V5.1 (SP5 EDITION)</title>
     <style>
         /* ==========================================================================
-           1. ZMIENNE CZASU RZECZYWISTEGO I RESET (TRYB MASTER ULTRA)
+           1. ZMIENNE CZASU RZECZYWISTEGO (TRYB PRO MASTER)
            ========================================================================== */
         :root {
-            --bg-primary: #020305;
-            --bg-secondary: #06090e;
+            --bg-primary: #010203;
+            --bg-secondary: #04060a;
             --accent-cyan: #00f0ff;
             --accent-purple: #9d00ff;
             --accent-rose: #ff0077;
             --accent-gold: #ffcc00;
+            --accent-orange: #ff6400;
             --text-main: #ffffff;
             --text-muted: #8a9cb5;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --transition-smooth: all 0.4s cubic-bezier(0.3, 1, 0.4, 1);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --font-main: 'Segoe UI', system-ui, sans-serif;
-            --font-mono: 'Courier New', monospace;
         }
 
         * {
@@ -35,463 +35,296 @@
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Paski przewijania */
-        ::-webkit-scrollbar { width: 8px; }
+        /* Upiększone paski przewijania */
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--accent-rose), var(--accent-purple));
-            border-radius: 4px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 5px;
         }
 
         /* ==========================================================================
-           2. TŁO DYNAMICZNE Z HEKSAGONA-PATTERNEM I FALAMI
+           2. TŁO DYNAMICZNE V5 (KOSMICZNE FALOWANIE)
            ========================================================================== */
         .ambient-grid {
             position: fixed; inset: 0; z-index: -3;
             background-image: 
-                radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%),
-                repeating-linear-gradient(60deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 100px),
-                repeating-linear-gradient(120deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 100px);
+                radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.9) 100%),
+                repeating-linear-gradient(45deg, rgba(0, 240, 255, 0.02) 0px, rgba(0, 240, 255, 0.02) 1px, transparent 1px, transparent 80px);
         }
 
-        .ambient-waves {
-            position: fixed; inset: 0; z-index: -2;
-            overflow: hidden;
+        .glow-orb {
+            position: fixed; border-radius: 50%; filter: blur(100px); z-index: -2;
+            animation: float 10s infinite alternate;
         }
+        .orb-1 { width: 400px; height: 400px; background: rgba(157,0,255,0.15); top: -100px; left: -100px; }
+        .orb-2 { width: 500px; height: 500px; background: rgba(255,0,119,0.1); bottom: -100px; right: -100px; animation-delay: -5s; }
 
-        .wave {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.08), transparent);
-            border-radius: 40%;
-            animation: waveAnimation 20s infinite linear;
-        }
-        .wave-1 { width: 200vw; height: 200vw; top: -100vw; left: -50vw; opacity: 0.5; }
-        .wave-2 { width: 180vw; height: 180vw; top: -80vw; left: 10vw; animation-delay: -5s; opacity: 0.3; }
-
-        @keyframes waveAnimation { 100% { transform: rotate(360deg); } }
+        @keyframes float { 100% { transform: translate(50px, 50px); } }
 
         /* ==========================================================================
-           3. NAWIGACJA TOP BAR V4.0 (Z EFEKTEM NEON-FLICKER)
+           3. NAWIGACJA V5
            ========================================================================== */
         header {
-            position: fixed; top: 0; width: 100%; height: 95px;
-            background: rgba(2, 3, 5, 0.85);
-            backdrop-filter: blur(25px);
+            position: fixed; top: 0; width: 100%; height: 90px;
+            background: rgba(1, 2, 3, 0.8);
+            backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--border-color);
             z-index: 9999;
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 5%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.9);
         }
 
         .brand-logo { display: flex; align-items: center; gap: 15px; }
-
         .logo-box {
-            width: 45px; height: 45px;
+            width: 50px; height: 50px;
             background: linear-gradient(135deg, var(--accent-rose), var(--accent-purple));
-            border-radius: 12px;
+            border-radius: 14px;
             display: grid; place-items: center;
-            font-size: 1.6rem; font-weight: 900;
-            color: #fff;
-            box-shadow: 0 0 25px rgba(157,0,255,0.5);
-            animation: flicker 4s infinite alternate;
+            font-size: 1.8rem; font-weight: 900; color: #fff;
+            box-shadow: 0 0 30px rgba(255, 0, 119, 0.5);
         }
-
         .brand-text {
-            font-size: 2rem; font-weight: 900; letter-spacing: 2px;
+            font-size: 2.2rem; font-weight: 900; letter-spacing: 2px;
             background: linear-gradient(to right, #fff, var(--accent-rose));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
         }
 
         nav { display: flex; gap: 40px; }
         nav a {
             color: var(--text-muted); text-decoration: none;
-            font-weight: 700; font-size: 1.1rem;
+            font-weight: 800; font-size: 1.2rem;
             position: relative; padding: 10px 0;
             transition: var(--transition-smooth);
         }
-        nav a:hover { color: #fff; }
+        nav a:hover { color: #fff; text-shadow: 0 0 15px var(--accent-cyan); }
         nav a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px;
-            background: var(--accent-rose);
-            transition: var(--transition-smooth);
-            border-radius: 3px;
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 4px;
+            background: var(--accent-cyan); transition: var(--transition-smooth); border-radius: 4px;
         }
-        nav a:hover::after { width: 100%; box-shadow: 0 0 20px var(--accent-rose); }
+        nav a:hover::after { width: 100%; box-shadow: 0 0 20px var(--accent-cyan); }
 
         /* ==========================================================================
-           4. HERO SEKCJA V4.0 (Z EFEKTEM GLITCH I GRADIENTOWĄ RAMĄ)
+           4. HERO SEKCJA (GLITCH TEXT V2)
            ========================================================================== */
         .container {
-            max-width: 1500px; width: 90%;
-            margin: 170px auto 100px auto;
+            max-width: 1600px; width: 92%;
+            margin: 180px auto 100px auto;
         }
 
         .hero-section {
-            background: rgba(6, 9, 14, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 40px;
-            padding: 100px 50px;
+            background: rgba(4, 6, 10, 0.7);
+            backdrop-filter: blur(25px);
+            border-radius: 50px;
+            padding: 120px 50px;
             text-align: center;
             position: relative;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            margin-bottom: 80px;
-            overflow: hidden;
-        }
-
-        /* Płynąca rama dla Hero */
-        .hero-section::before {
-            content: ''; position: absolute; inset: -5px; z-index: -1;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-rose), var(--accent-cyan));
-            background-size: 400%;
-            animation: borderFlow 12s linear infinite;
-            border-radius: 42px;
-            filter: blur(10px);
-        }
-
-        @keyframes borderFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 400% 50%; }
+            border: 2px solid rgba(255,255,255,0.05);
+            box-shadow: 0 50px 120px rgba(0,0,0,0.9), inset 0 0 50px rgba(0, 240, 255, 0.1);
+            margin-bottom: 100px;
         }
 
         .hero-section h1 {
-            font-size: 5rem; font-weight: 900; line-height: 1.1;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
-            position: relative;
+            font-size: 5.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px;
         }
-
-        /* Efekt Glitch na słowie "BLOKS" */
-        .glitch-text {
-            color: #fff;
-            position: relative;
-        }
-        .glitch-text::before,
-        .glitch-text::after {
-            content: attr(data-text);
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.8;
-        }
-        .glitch-text::before {
-            color: var(--accent-cyan);
-            z-index: -1;
-            animation: glitchEffect 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
-            transform: translate(-3px, -2px);
-        }
-        .glitch-text::after {
-            color: var(--accent-rose);
-            z-index: -2;
-            animation: glitchEffect 0.3s cubic-bezier(.25,.46,.45,.94) both reverse infinite;
-            transform: translate(3px, 2px);
-        }
-
-        @keyframes glitchEffect {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
+        .text-gradient {
+            background: linear-gradient(to right, var(--accent-rose), var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(157, 0, 255, 0.4);
         }
 
         .hero-section p {
-            font-size: 1.4rem; color: var(--text-muted);
-            max-width: 900px; margin: 0 auto 50px auto;
-            line-height: 1.6;
-            position: relative; z-index: 2;
+            font-size: 1.6rem; color: var(--text-muted);
+            max-width: 1000px; margin: 0 auto; line-height: 1.6;
         }
 
         /* ==========================================================================
-           5. ZARZĄD I PRODUKTY (Z PŁYNĄCYMI RAMKAMI PRO)
+           5. SYSTEM KART PRODUKTÓW (PRO PRO PRO)
            ========================================================================== */
         .section-title {
-            font-size: 2.8rem; font-weight: 900;
-            margin: 80px 0 50px 0;
+            font-size: 3.2rem; font-weight: 900;
+            margin: 100px 0 60px 0;
             display: flex; align-items: center; gap: 20px;
-            text-transform: uppercase;
+            text-transform: uppercase; text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
         .section-title::before {
-            content: ''; width: 12px; height: 50px;
+            content: ''; width: 14px; height: 55px;
             background: linear-gradient(to bottom, var(--accent-rose), var(--accent-purple));
-            border-radius: 6px;
-            box-shadow: 0 0 20px var(--accent-purple);
+            border-radius: 7px; box-shadow: 0 0 25px var(--accent-rose);
         }
 
-        .board-grid, .products-grid {
-            display: grid; gap: 45px;
-            margin-bottom: 100px;
-        }
-        .board-grid { grid-template-columns: 1fr 1fr; }
-        .products-grid { grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px; }
 
-        /* Płynąca rama dla kart (PRO MASTERY) */
-        .board-card, .product-card {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 35px;
-            padding: 40px;
+        .card-pro {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 40px;
+            padding: 45px;
             position: relative;
             transition: var(--transition-smooth);
             overflow: hidden;
+            display: flex; flex-direction: column;
         }
 
-        /* Efekt płynącego neona w ramie na hover (NOWOŚĆ ULTRA) */
-        .board-card::before, .product-card::before {
-            content: ''; position: absolute; inset: -4px; z-index: -1;
-            background: conic-gradient(from 0deg at 50% 50%, var(--accent-rose), var(--accent-purple), var(--accent-cyan), var(--accent-rose));
-            border-radius: 37px;
-            opacity: 0;
-            transition: opacity 0.4s;
-            animation: conicFlow 6s linear infinite;
+        /* Płynący gradient na hoverze kart */
+        .card-pro::before {
+            content: ''; position: absolute; inset: -2px; z-index: -1;
+            background: conic-gradient(from 0deg, var(--accent-cyan), var(--accent-purple), var(--accent-rose), var(--accent-cyan));
+            border-radius: 42px; opacity: 0; transition: 0.4s;
         }
-        .board-card:hover::before, .product-card:hover::before { opacity: 0.6; }
-        .board-card:hover, .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 70px rgba(0,0,0,0.7), inset 0 0 30px rgba(157,0,255,0.05);
-            border-color: transparent;
-        }
+        .card-pro:hover::before { opacity: 1; animation: spin 4s linear infinite; }
+        .card-pro:hover { transform: translateY(-12px); box-shadow: 0 40px 100px rgba(0,0,0,0.9); background: rgba(0,0,0,0.8); }
 
-        @keyframes conicFlow { 100% { transform: rotate(360deg); } }
-
-        /* ZARZĄD SZCZEGÓŁY */
-        .board-card { display: flex; align-items: center; gap: 30px; }
-        .board-avatar {
-            width: 120px; height: 120px; border-radius: 50%;
-            background: #000; border: 3px solid var(--accent-purple);
-            display: grid; place-items: center; font-size: 3rem;
-            box-shadow: 0 0 25px var(--accent-purple);
-        }
-        .board-info h3 { font-size: 2.2rem; color: #fff; margin-bottom: 5px; }
-        .board-info .role { color: var(--accent-cyan); font-weight: 700; margin-bottom: 15px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* PRODUKTY SZCZEGÓŁY */
-        .product-card { display: flex; flex-direction: column; justify-content: space-between; }
         .badge-premium {
-            background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan);
-            padding: 8px 18px; border-radius: 50px; font-weight: 800; font-size: 0.8rem;
-            text-transform: uppercase; margin-bottom: 25px;
+            background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan);
+            padding: 10px 20px; border-radius: 50px; font-weight: 900; font-size: 0.9rem;
+            text-transform: uppercase; margin-bottom: 25px; align-self: flex-start;
         }
         .img-wrapper {
-            width: 100%; height: 260px; background: #000;
-            border-radius: 20px; margin-bottom: 25px;
-            display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.05);
+            width: 100%; height: 280px; background: #000;
+            border-radius: 25px; margin-bottom: 30px;
+            display: grid; place-items: center; border: 2px solid rgba(255,255,255,0.05);
+            position: relative; overflow: hidden;
         }
-        .img-wrapper img { max-width: 85%; max-height: 85%; transition: transform 0.6s; }
-        .product-card:hover .img-wrapper img { transform: scale(1.1) rotate(2deg); }
+        .img-wrapper img { max-width: 90%; max-height: 90%; transition: 0.5s; }
+        .card-pro:hover .img-wrapper img { transform: scale(1.15) rotate(3deg); }
 
-        .product-card h3 { font-size: 2rem; font-weight: 900; margin-bottom: 15px; }
-        .product-card p { color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; flex-grow: 1; }
+        /* STYL DLA BRAKU ZDJĘCIA (KARTONOWY JBL / ZAWIESZKA) */
+        .placeholder-box {
+            background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 15px, #222 15px, #222 30px);
+            width: 100%; height: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; padding: 20px; text-align: center;
+        }
+        .placeholder-icon { font-size: 5rem; margin-bottom: 10px; }
+        .placeholder-text { font-family: monospace; font-weight: bold; background: rgba(0,0,0,0.7); padding: 8px 15px; border-radius: 10px; font-size: 0.9rem;}
+
+        .card-pro h3 { font-size: 2.3rem; font-weight: 900; margin-bottom: 15px; color: #fff; }
+        .card-pro p { color: var(--text-muted); line-height: 1.7; margin-bottom: 30px; font-size: 1.1rem; flex-grow: 1; }
 
         .price-row {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
         }
-        .price-val { font-size: 2.6rem; font-weight: 900; color: var(--accent-rose); text-shadow: 0 0 20px rgba(255,0,85,0.4); }
+        .price-val { font-size: 3rem; font-weight: 900; }
 
         .btn-buy {
-            width: 100%; padding: 20px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-            border: none; border-radius: 20px;
-            color: #fff; font-size: 1.2rem; font-weight: 800; text-transform: uppercase;
-            cursor: pointer; transition: var(--transition-smooth);
-            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
-            position: relative; overflow: hidden;
+            width: 100%; padding: 22px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            border: none; border-radius: 25px;
+            color: #fff; font-size: 1.3rem; font-weight: 900; text-transform: uppercase;
+            cursor: pointer; transition: 0.4s; box-shadow: 0 15px 30px rgba(0, 240, 255, 0.4);
         }
-        .btn-buy:hover { transform: scale(1.02); box-shadow: 0 0 30px var(--accent-cyan); }
-        .btn-buy::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.6s;
-        }
-        .btn-buy:hover::before { left: 100%; }
+        .btn-buy:hover { transform: scale(1.03) translateY(-5px); box-shadow: 0 20px 40px var(--accent-purple); }
 
-        /* ==========================================================================
-           8. HARMONOGRAM LOGISTYCZNY
-           ========================================================================== */
-        .logistics-box {
-            background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 40px; padding: 50px;
-            margin-bottom: 80px; position: relative;
-        }
-
-        .data-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
-        .data-table th { text-align: left; padding: 20px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
-        .data-table td { background: rgba(0,0,0,0.4); padding: 25px 20px; font-size: 1.2rem; font-weight: 600; }
-        .data-table tr td:first-child { border-radius: 15px 0 0 15px; color: var(--accent-cyan); font-family: var(--font-mono); }
-        .data-table tr td:last-child { border-radius: 0 15px 15px 0; }
-        .status-badge {
-            background: rgba(0, 240, 255, 0.12); color: var(--accent-cyan);
-            padding: 8px 18px; border-radius: 30px; font-size: 0.9rem; font-weight: 700;
-        }
-
-        /* ==========================================================================
-           9. STOPKA GLOBAL ULTRA
-           ========================================================================== */
-        footer {
-            background: #000; padding: 80px 0;
-            text-align: center; border-top: 1px solid var(--border-color);
-        }
-        .footer-logo { font-size: 2.5rem; font-weight: 900; color: #fff; text-transform: uppercase; margin-bottom: 10px; }
-        .footer-logo span { color: var(--accent-cyan); }
-        footer p { color: var(--text-muted); font-size: 1rem; margin-bottom: 5px; }
-
-        /* ==========================================================================
-           10. ANIMACJE
-           ========================================================================== */
-        @keyframes flicker {
-            0% { opacity: 1; box-shadow: 0 0 25px rgba(157,0,255,0.5); }
-            5% { opacity: 0.8; box-shadow: 0 0 10px rgba(157,0,255,0.3); }
-            10% { opacity: 1; box-shadow: 0 0 25px rgba(157,0,255,0.5); }
-        }
     </style>
 </head>
 <body>
 
     <div class="ambient-grid"></div>
-    <div class="ambient-waves">
-        <div class="wave wave-1"></div>
-        <div class="wave wave-2"></div>
-    </div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
 
     <header>
         <div class="brand-logo">
-            <div class="logo-box">B</div>
+            <div class="logo-box">SP5</div>
             <div class="brand-text">BLOKS ENTERPRISE</div>
         </div>
         <nav>
-            <a href="#zarzad">Zarząd</a>
-            <a href="#produkty">Produkty</a>
-            <a href="#logistyka">Logistyka SP5</a>
-            <a href="#regulamin">Regulamin</a>
+            <a href="#produkty">Katalog PRO</a>
+            <a href="#logistyka">Odbiór (Tajny Plecak)</a>
         </nav>
     </header>
 
     <div class="container">
         
         <div class="hero-section">
-            <h1>Imperium Manufaktury <span class="glitch-text" data-text="BLOKS">BLOKS</span></h1>
-            <p>Od projektów w MS Paint, po wycinanie z kartonu i tworzenie unikalnych, fizycznych makiet z drewna. Globalna dominacja rozpoczyna się pod Szkołą Podstawową nr 5. Czas na wersje V2!</p>
+            <h1>Imperium <span class="text-gradient">BLOKS PRO V5.1</span></h1>
+            <p>Dystrybucja pod Szkołą Podstawową nr 5 w Jastrzębiu. Operacja "Tajny Plecak" aktywna. Nikt nie dotyka towaru przed zapłatą. Tylko autentyczne makiety. Czysty biznes.</p>
         </div>
 
-        <h2 id="zarzad" class="section-title">Zarząd Korporacji</h2>
-        <div class="board-grid">
-            <div class="board-card">
-                <div class="board-avatar">💼</div>
-                <div class="board-info">
-                    <h3>Mateusz (Venom)</h3>
-                    <div class="role">Założyciel, CEO & Główny Projektant</div>
-                    <p>Mózg całej operacji. Twórca rewolucyjnych projektów w programie Paint i Szef Sprzedaży na rynku krajowym oraz zagranicznym (Czechy). Nadzoruje dystrybucję pod szkołą i dba o potężne zyski firmy.</p>
-                </div>
-            </div>
-            <div class="board-card">
-                <div class="board-avatar">🛠️</div>
-                <div class="board-info">
-                    <h3>Wiktor (Wiq)</h3>
-                    <div class="role">Współtwórca & Dyrektor Produkcji Drewien</div>
-                    <p>Mistrz obróbki drewna i realizacji technicznej makiet. To on przekłada wizje z Paint-a na fizyczne, twarde makiety z drewna. Niezastąpiony współtwórca, z którym zyski dzielone są 50/50.</p>
-                </div>
-            </div>
-        </div>
-
-        <h2 id="produkty" class="section-title">Katalog Ultra Premium V4.0</h2>
+        <h2 id="produkty" class="section-title">Katalog Ultra Premium V5.1</h2>
         <div class="products-grid">
-            
-            <div class="product-card">
-                <div class="badge-premium" style="background: rgba(255,204,0,0.15); color: var(--accent-gold);">LEGENDARNY UNIKAT</div>
-                <div class="img-wrapper"><div style="font-size: 5rem;">📱</div></div>
-                <h3>Blocks Phone (v0)</h3>
-                <p>Oryginalny, pierwszy prototyp, od którego wszystko się zaczęło. Wyjątkowo surowa forma, fundament całego naszego imperium. Prawdziwy skarb kolekcjonerski.</p>
-                <div class="price-row" style="border-color: rgba(255,204,0,0.2);">
-                    <span style="color: var(--text-muted); font-weight: 700;">Status:</span>
-                    <span class="price-val" style="color: var(--accent-gold); font-size: 1.5rem; text-shadow: 0 0 10px rgba(255,204,0,0.5);">Bardzo trudny do znalezienia</span>
+
+            <div class="card-pro">
+                <div class="badge-premium" style="background: rgba(255,0,119,0.15); color: var(--accent-rose);">Oficjalny Certyfikat SP5</div>
+                <div class="img-wrapper">
+                    <div class="placeholder-box" style="background: repeating-linear-gradient(45deg, #220000, #220000 15px, #330000 15px, #330000 30px);">
+                        <div class="placeholder-icon">🏷️🔴</div>
+                        <div class="placeholder-text" style="color: var(--accent-rose); border: 1px solid var(--accent-rose);">Szkoła Podstawowa nr 5<br>w Jastrzębiu</div>
+                    </div>
                 </div>
-                <div class="price-row">
-                    <span style="color: var(--text-muted); font-weight: 700;">Cena Detal:</span>
-                    <span class="price-val">9 PLN</span>
+                <h3>Czerwona Zawieszka BLOKS SP5</h3>
+                <p>To nie jest gadżet. To jest **Oficjalny Certyfikat Autentyczności Manufaktury BLOKS**, wydawany wyłącznie pod Szkołą Podstawową nr 5 w Jastrzębiu. Każda makieta telefonu lub głośnika musi mieć tę zawieszkę, aby udowodnić pochodzenie z Twojego plecaczka. Gwarancja jakości Venoma i Wiqa.</p>
+                <div class="price-row" style="border-color: rgba(255,0,119,0.2);">
+                    <span style="color: var(--text-muted); font-weight: 700; font-size: 1.2rem;">Cena Detal:</span>
+                    <span class="price-val" style="color: var(--accent-rose); text-shadow: 0 0 20px rgba(255,0,119,0.6);">4 PLN</span>
                 </div>
-                <button class="btn-buy" style="background: linear-gradient(90deg, #b59410, var(--accent-gold)); color: #000;">Kup Unikat</button>
+                <button class="btn-buy" style="background: linear-gradient(90deg, #bb0000, var(--accent-rose)); box-shadow: 0 15px 30px rgba(255,0,119,0.4);">Dodaj Certyfikat do Zamówienia</button>
             </div>
 
-            <div class="product-card">
+            <div class="card-pro">
+                <div class="badge-premium" style="background: rgba(255,100,0,0.15); color: var(--accent-orange);">Kartonowa Edycja Specjalna</div>
+                <div class="img-wrapper">
+                    <div class="placeholder-box">
+                        <div class="placeholder-icon">📦🔊</div>
+                        <div class="placeholder-text" style="color: var(--accent-orange); border: 1px solid var(--accent-orange);">[ TRWA GENEROWANIE ZDJĘCIA ]</div>
+                    </div>
+                </div>
+                <h3>Kartonowy Głośnik JBL</h3>
+                <p>Nasz hitowy produkt wejściowy! Wykonany w 100% z modyfikowanego kartonu głośnik w stylu JBL. Lekki, fajny i idealny na przerwy pod SP5.</p>
+                <div class="price-row" style="border-color: rgba(255,100,0,0.2);">
+                    <span style="color: var(--text-muted); font-weight: 700; font-size: 1.2rem;">Cena w PL:</span>
+                    <span class="price-val" style="color: var(--accent-orange); text-shadow: 0 0 20px rgba(255,100,0,0.6);">3 PLN</span>
+                </div>
+                <button class="btn-buy" style="background: linear-gradient(90deg, #ff4500, #ff8c00); box-shadow: 0 15px 30px rgba(255,100,0,0.4);">Kup Kartonowego JBL</button>
+            </div>
+            
+            <div class="card-pro">
+                <div class="badge-premium" style="background: rgba(255,204,0,0.15); color: var(--accent-gold);">LEGENDARNY UNIKAT</div>
+                <div class="img-wrapper"><div style="font-size: 6rem;">📱</div></div>
+                <h3>Blocks Phone (v0)</h3>
+                <p>Oryginalny, pierwszy prototyp. Surowa forma, fundament imperium. Bardzo trudny do znalezienia.</p>
+                <div class="price-row" style="border-color: rgba(255,204,0,0.2);">
+                    <span style="color: var(--text-muted); font-weight: 700; font-size: 1.2rem;">Cena Detal:</span>
+                    <span class="price-val" style="color: var(--accent-gold); text-shadow: 0 0 20px rgba(255,204,0,0.6);">9 PLN</span>
+                </div>
+                <button class="btn-buy" style="background: linear-gradient(90deg, #b59410, var(--accent-gold)); color: #000; box-shadow: 0 15px 30px rgba(255,204,0,0.4);">Kup Unikat</button>
+            </div>
+
+            <div class="card-pro">
                 <div class="badge-premium">Edycja Paint V1</div>
                 <div class="img-wrapper"><img src="obraz_2026-06-11_200038508.png" alt="Phone"></div>
                 <h3>Blocks Phone V1</h3>
-                <p>Rewolucyjny projekt wprost z ekranu komputera. Bordowo-niebieski design obudowy, stworzony z myślą o najwyższych doznaniach estetycznych.</p>
+                <p>Rewolucyjny projekt wprost z Paint-a. Bordowo-niebieski design premium.</p>
                 <div class="price-row">
-                    <span style="color: var(--text-muted); font-weight: 700;">Cena w PL:</span>
-                    <span class="price-val">10 PLN</span>
+                    <span style="color: var(--text-muted); font-weight: 700; font-size: 1.2rem;">Cena w PL:</span>
+                    <span class="price-val" style="color: var(--accent-cyan); text-shadow: 0 0 20px rgba(0,240,255,0.6);">10 PLN</span>
                 </div>
                 <button class="btn-buy">Kup Telefon</button>
             </div>
 
-            <div class="product-card">
-                <div class="badge-premium">Audio System V1</div>
+            <div class="card-pro">
+                <div class="badge-premium" style="background: rgba(157,0,255,0.15); color: var(--accent-purple);">Audio System V1</div>
                 <div class="img-wrapper"><img src="Zrzut ekranu 2026-06-11 150139.png" alt="Speaker"></div>
                 <h3>BLOKS Speaker</h3>
-                <p>Zielony drewniany głośnik makieta. Wyposażony w unikalne pomarańczowe kropki basowe. Idealny na przerwy i spacery. Wersja V2 grająca już w produkcji!</p>
-                <div class="price-row">
-                    <span style="color: var(--text-muted); font-weight: 700;">Cena w PL:</span>
-                    <span class="price-val">5 PLN</span>
+                <p>Zielony drewniany głośnik makieta z basowymi kropkami. Idealny na przerwy!</p>
+                <div class="price-row" style="border-color: rgba(157,0,255,0.2);">
+                    <span style="color: var(--text-muted); font-weight: 700; font-size: 1.2rem;">Cena w PL:</span>
+                    <span class="price-val" style="color: var(--accent-purple); text-shadow: 0 0 20px rgba(157,0,255,0.6);">5 PLN</span>
                 </div>
-                <button class="btn-buy">Kup Głośnik</button>
+                <button class="btn-buy" style="background: linear-gradient(90deg, var(--accent-purple), #ff00ff); box-shadow: 0 15px 30px rgba(157,0,255,0.4);">Kup Głośnik</button>
             </div>
 
-            <div class="product-card">
-                <div class="badge-premium" style="background: rgba(255,0,85,0.15); color: var(--accent-rose);">Certyfikat Autentyczności</div>
-                <div class="img-wrapper"><img src="Zrzut ekranu 2026-06-11 152350.png" alt="Zawieszka"></div>
-                <h3>Czerwona Zawieszka BLOKS</h3>
-                <p>Oficjalny znak graficzny Manufaktury BLOKS Electronics. Poświadcza oryginalność i najwyższą jakość każdej sztuki opuszczającej nasz warsztat.</p>
-                <div class="price-row">
-                    <span style="color: var(--text-muted); font-weight: 700;">Status:</span>
-                    <span class="price-val" style="color: var(--accent-gold); font-size: 1.6rem; text-shadow: 0 0 10px rgba(255,204,0,0.5);">NIE NA SPRZEDAŻ</span>
-                </div>
-                <button class="btn-buy" style="background: linear-gradient(90deg, #333, #555); color: #888; cursor: not-allowed;" disabled>Unikat Archiwalny</button>
-            </div>
-
-        </div>
-
-        <h2 id="logistyka" class="section-title">Harmonogram Dystrybucji SP5</h2>
-        <div class="logistics-box">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Dzień</th>
-                        <th>Godziny Dropu pod Szkołą</th>
-                        <th>Status Systemu</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>PONIEDZIAŁEK</td><td>11:00 — 12:00</td><td><span class="status-badge">Aktywny Drop</span></td></tr>
-                    <tr><td>WTOREK</td><td>Okolice 14:00 lub 15:00</td><td><span class="status-badge" style="background: rgba(157,0,255,0.2); color: var(--accent-purple);">Elastyczny</span></td></tr>
-                    <tr><td>ŚRODA</td><td>13:00 — 14:00</td><td><span class="status-badge">Aktywny Drop</span></td></tr>
-                    <tr><td>CZWARTEK</td><td>14:00 — 16:00</td><td><span class="status-badge">Pełna Gotowość</span></td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2 id="regulamin" class="section-title">Regulamin Manufaktury</h2>
-        <div class="rules-box">
-            <ul class="rules-list">
-                <li><b>Polityka Transakcyjna:</b> Płatność następuje wyłącznie bezpośrednio do rąk Szefa Sprzedaży (Venoma). Zwrotów zakupionych makiet nie przyjmujemy.</li>
-                <li><b>Charakter Produktów:</b> Urządzenia BLOKS Electronics stanowią wyrafinowane makiety z drewna i kartonu. To sprzęt kolekcjonerski, dedykowany do bezpiecznej zabawy i podziwu rówieśników.</li>
-                <li><b>Bezpieczeństwo Technologiczne:</b> W przypadku kradzieży towaru, firma uruchamia protokół zgłoszeniowy na komisariacie policji obok szkoły (ciap, ciap).</li>
-            </ul>
         </div>
 
     </div>
-
-    <footer>
-        <div class="footer-logo">BLOKS <span>ENTERPRISE</span></div>
-        <p>© 2026 Zarząd Główny: Mateusz (Venom) & Wiktor (Wiq).</p>
-        <p>Wszelkie prawa zastrzeżone. Dystrybucja globalna od Jastrzębia-Zdroju po Czechy (za korony!).</p>
-    </footer>
 
 </body>
 </html>
